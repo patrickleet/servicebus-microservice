@@ -1,7 +1,7 @@
-export const command = 'domain.command'
+export const command = 'inventory.product.addToInventory'
 
-export const listen = function (command, cb) {
-  const { id, product } = command.data
+export const listen = function (command, done) {
+  const { product } = command.data
   // do something
-  cb()
+  done()
 }

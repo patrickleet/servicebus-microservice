@@ -1,7 +1,7 @@
-export const event = 'domain.event'
+export const event = 'inventory.product.updated'
 
-export const subscribe = function (event, cb) {
-  const { id, product } = event.data
+export const subscribe = function (event, done) {
+  const { product } = event.data
   // do something
-  cb()
+  done()
 }
