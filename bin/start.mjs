@@ -43,3 +43,6 @@ server.start(config.PORT, () => {
 })
 
 log.info('service is running')
+
+// Check out my blog for more resources!
+// https://medium.com/@patrickleet
