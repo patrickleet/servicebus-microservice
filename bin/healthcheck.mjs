@@ -3,15 +3,24 @@
 
 import amqplib from 'amqplib'
 
-const open = amqplib.connect(process.env.RABBITMQ_URL);
-
-const exit = ({healthy = true}) => {
-  console.log({healthy})
+export const exit = ({healthy = true} = {}) => {
   return healthy ? process.exit(0) : process.exit(1)
 }
 
-open.then(() => {
-  exit({healthy: true})
-}).catch((e) =>{
-  exit({healthy: false})
-})
+export const open = amqplib.connect(process.env.RABBITMQ_URL);
+
+export const handleSuccessfulConnection = (healthcheck) => {
+  return () => {
+    healthcheck({healthy: true})
+  }
+}
+
+export const handleUnsuccessfulConnection = (healthcheck) => {
+  return (e) => {
+    healthcheck({healthy: false})
+  }
+}
+
+open
+  .then(handleSuccessfulConnection(exit))
+  .catch(handleUnsuccessfulConnection(exit))
