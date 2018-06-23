@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+      "eslint:recommended"
+  ],
+  "parser": "babel-eslint",
+  "globals": {
+      "gql": true,
+      "ga": true,
+      "describe": true,
+      "it": true,
+      "test": true,
+      "expect": true,
+      "jest": true,
+      "beforeEach": true,
+      "afterEach": true,
+      "jasmine": true,
+      "beforeAll": true,
+      "afterAll": true
+  }
+}

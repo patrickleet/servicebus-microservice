@@ -1,0 +1,38 @@
+{
+  "name": "servicebus-microservice-template",
+  "version": "0.0.1",
+  "description": "servicebus-microservice-template",
+  "bin": {
+    "healthcheck": "./bin/healthcheck.mjs",
+    "start": "./bin/start.mjs"
+  },
+  "scripts": {
+    "start": "./bin/start.mjs",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src __tests__",
+    "test": "jest --config jest.json --coverage --verbose",
+    "test:staging": "jest --config jest.staging.json --verbose --runInBand",
+    "test:watch": "jest --config jest.json --watch --coverage --verbose",
+    "precommit": "npm run lint",
+    "prepush": "make ci"
+  },
+  "dependencies": {
+    "cconfig": "^1.2.4",
+    "errortrap": "^1.0.2",
+    "express-api-common": "^3.0.2",
+    "llog": "^0.1.0",
+    "pino": "^4.17.3",
+    "servicebus": "^2.2.0",
+    "servicebus-bus-common": "^1.1.0",
+    "servicebus-register-handlers": "^0.1.7"
+  },
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "eslint": "^4.2.0",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "node-fetch": "^1.7.3"
+  },
+  "license": "ISC",
+  "snyk": true
+}

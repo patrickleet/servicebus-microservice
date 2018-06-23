@@ -1,0 +1,21 @@
+{
+  "roots": ["<rootDir>/__tests__/unit"],
+  "testEnvironment": "node",
+  "modulePaths": [
+    "bin",
+    "handlers",
+    "/node_modules/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "collectCoverageFrom" : [
+    "bin/**/*.mjs",
+    "handlers/**/*.mjs"
+  ]
+}

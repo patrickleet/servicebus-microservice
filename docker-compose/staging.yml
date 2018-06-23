@@ -1,0 +1,55 @@
+version: '3.3'
+
+networks:
+  default:
+  rethink:
+  servicebus:
+
+services:
+
+  staging-deps:
+    image: microservice
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEBUG=servicebus*
+    networks:
+      - servicebus
+      - rethink
+      - default
+    depends_on:
+      - redis
+      - rabbitmq
+      - rethink
+
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    hostname: rabbitmq
+    networks:
+      - servicebus
+
+  redis:
+    image: redis
+    networks:
+      - servicebus
+
+  # reinstall dev deps to get testing tools and run staging tests
+  staging:
+    image: node:9
+    volumes:
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    networks:
+      - servicebus
+      - rethink
+      - default
+    environment:
+      - apiUrl=http://staging-deps:3000
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEBUG=$DEBUG
+    command: npm run test:staging

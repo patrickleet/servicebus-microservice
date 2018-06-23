@@ -1,0 +1,86 @@
+version: '2.1'
+
+services:
+
+  # This file is for the continunous integration testing process.
+  # It is meant to start with a freshly cloned repository.
+  # It will start with a minimum linux image running node,
+  # install package managers, and dependencies, run tests, and in
+  # the end, leave us with a minimal production ready docker container
+  # that can be run in our cluster.
+
+  # I left the env variables as examples of things
+  # you may want to pass in from the CI server
+  base:
+    image: node:9
+    volumes:
+      - ..:/usr/src/app/
+    working_dir: /usr/src/app/
+
+  clean:
+    extends:
+      service: base
+    command: rm -rf node_modules && rm -rf coverage && rm -rf dist && rm -rf dev_node_modules && rm -rf jest_0
+
+  npmClean:
+    extends:
+      service: base
+    command: rm -rf node_modules
+  
+  version:
+    extends:
+      service: base
+    command: ash -c "node -p \"require('./package.json').version.replace('\n', '')\""
+
+  # output: node_modules/ with all dependencies
+  install:
+    extends:
+      service: base
+    command: npm i
+
+  lint:
+    extends:
+      service: base
+    command: npm run lint
+
+  unit-tests:
+    extends:
+      service: base
+    command: npm run test
+
+  watch-tests:
+    extends:
+      service: base
+    command: npm run test:watch
+
+  # output: dist/
+  build:
+    extends:
+      service: unit-tests
+    command: npm run build
+
+  # also deleting unneeded cache for minimal build size
+  # npm prune wasn't working on alpine linux
+  installProdOnly:
+    extends:
+      service: base
+    command: ash -c "npm install --only=production"
+
+  prodDeps:
+    extends:
+      service: base
+    command: ash -c "mv -f ./node_modules ./prod_node_modules && mv -f ./dev_node_modules ./node_modules"
+
+  qa:
+    extends: 
+      service: base
+    environment: 
+      - apiUrl=${apiUrl:-http://qa-api.yourwebsite.com}
+    command: npm run test:staging
+
+  production:
+    extends: 
+      service: base
+    environment: 
+      - apiUrl=${apiUrl:-http://api.yourwebsite.com}
+    command: npm run test:staging

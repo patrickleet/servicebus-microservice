@@ -1,0 +1,41 @@
+version: '3.5'
+
+networks:
+  servicebus:
+
+services:
+
+  rabbitmq:
+    image: rabbitmq
+    hostname: rabbitmq
+    networks:
+      - servicebus
+    ports:
+      - 5672:5672
+
+  redis:
+    image: redis
+    networks:
+      - servicebus
+    ports:
+      - 6379:6379
+
+  service:
+    image: node:10
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app/
+    user: node
+    ports:
+      - 3000:3000
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - NODE_ENV=development
+    networks:
+      - servicebus
+    depends_on:
+      - rediss
+      - rabbitmq
+    command: ./bin/microservice.mjs

@@ -1,0 +1,9 @@
+{
+  "roots": ["<rootDir>/__tests__/staging"],
+  "testRegex": ".*\\.js$",
+  "testEnvironment": "node",
+  "modulePaths": [
+    "src",
+    "/node_modules/"
+  ]
+}
