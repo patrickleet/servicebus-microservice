@@ -7,12 +7,20 @@ import errortrap from 'errortrap'
 import registerHandlers from 'servicebus-register-handlers'
 import sbc from 'servicebus-bus-common';
 import { config } from '../config.mjs'
-import server from 'express-api-common'
+import eac from 'express-api-common'
 
 errortrap()
 
 const bus = sbc.makeBus(config)
 const { queuePrefix } = config
+
+const server = eac.default({
+  logger: log
+})
+
+server.start(config.PORT, () => {
+  log.info(`Server listening on port ${config.PORT}`)
+})
 
 registerHandlers({
   bus,
@@ -20,7 +28,5 @@ registerHandlers({
   modules: true,
   queuePrefix
 })
-
-server.start()
 
 log.info('service is running')
