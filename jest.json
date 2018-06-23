@@ -6,6 +6,13 @@
     "handlers",
     "/node_modules/"
   ],
+  "moduleFileExtensions": [
+    "js",
+    "mjs"
+  ],
+  "transform": {
+    "^.+\\.m?js$": "babel-jest"
+  },
   "coverageThreshold": {
     "global": {
       "branches": 100,
@@ -15,7 +22,8 @@
     }
   },
   "collectCoverageFrom" : [
-    "bin/**/*.mjs",
-    "handlers/**/*.mjs"
+    "bin/*.{js,jsx,mjs}",
+    "handlers/*.{js,jsx,mjs}"
   ]
-}
+}  
+  

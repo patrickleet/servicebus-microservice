@@ -27,6 +27,8 @@
     "servicebus-register-handlers": "^0.1.8"
   },
   "devDependencies": {
+    "babel-jest": "^23.0.1",
+    "babel-preset-env": "^1.7.0",
     "debug": "^3.1.0",
     "eslint": "^4.2.0",
     "husky": "^0.14.3",
