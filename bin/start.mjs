@@ -18,15 +18,15 @@ const server = eac.default({
   logger: log
 })
 
-server.start(config.PORT, () => {
-  log.info(`Server listening on port ${config.PORT}`)
-})
-
 registerHandlers({
   bus,
   path:  path.resolve(process.cwd(), 'handlers'),
   modules: true,
   queuePrefix
+})
+
+server.start(config.PORT, () => {
+  log.info(`Server listening on port ${config.PORT}`)
 })
 
 log.info('service is running')
