@@ -11,19 +11,28 @@ describe('The list.item.add command handler', () => {
   })
 
   it('should handle an command with the listen function', () => {
-    let mockCommandData = {
+    let command = {
+      type: 'list.item.added',
       data: {
         item: {
           todo: 'write this test',
           completed: false
         }
+      },
+      datetime: new Date()
+    }
+
+    let context = {
+      bus: {
+        publish: jest.fn()
       }
     }
 
     let done = jest.fn()
 
-    listen(mockCommandData, done)
+    listen.call(context, command, done)
 
+    expect(context.bus.publish).toBeCalledWith('list.item.added')
     expect(done).toBeCalled()
   })
 })

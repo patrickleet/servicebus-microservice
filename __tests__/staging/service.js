@@ -1,9 +1,6 @@
 import debug from 'debug'
 import servicebus from 'servicebus'
 
-// This is more of a test of servicebus than anything else
-// but I found it helpful in showing how servicebus works!
-
 const log = debug('microservice')
 
 const rmq = process.env.RABBITMQ_URL || 'amqp://localhost:5672'
@@ -26,16 +23,7 @@ describe('service', () => {
 
     bus.on('ready', () => {
       log('bus is ready')
-
-      bus2 = servicebus.bus({
-        url: rmq
-      })
-      bus2.use(bus.package())
-
-      bus2.on('ready', () => {
-        log('bus2 is ready')
-        done()
-      })
+      done()
     })
   })
 
@@ -43,13 +31,12 @@ describe('service', () => {
     // give messages some time to send before closing bus
     setTimeout(() => {
       bus.close()
-      bus2.close()
     }, 500)
   })
 
-  it('commands work as expected', (done) => {
+  it('list.item.add command', (done) => {
     let doTest = new Promise((resolve, reject) => {
-      let testCommand = 'test.command'
+      let testCommand = 'list.item.add'
       let newItem = {
         item: {
           todo: 'write tests',
@@ -57,12 +44,12 @@ describe('service', () => {
         }
       }
 
-      bus2.listen('test.command', (command) => {
-        log('received command')
-        expect(command).toBeDefined()
-        expect(command.data).toEqual(newItem)
-        expect(command.datetime).toBeDefined()
-        expect(command.type).toBe(testCommand)
+      bus.subscribe('list.item.added', (event) => {
+        log('received event')
+        expect(event).toBeDefined()
+        expect(event.data).toEqual(newItem)
+        expect(event.datetime).toBeDefined()
+        expect(event.type).toBe(testCommand)
         resolve()
       })
 
@@ -74,7 +61,7 @@ describe('service', () => {
 
     doTest
       .then(() => {
-        log('command test done')
+        log('list.item.add command')
         done()
       })
   })
