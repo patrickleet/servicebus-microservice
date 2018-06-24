@@ -1,0 +1,50 @@
+version: '3.3'
+
+networks:
+
+  servicebus:
+    external: true
+
+services:
+
+  service:
+    image: patrickleet/list:${TAG}
+    environment:
+      - RABBITMQ_URL=amqp://servicebus_rmq1:5672
+      - REDIS_HOST=servicebus_redis
+      - REDIS_PORT=6379
+      - NODE_ENV=production
+    networks:
+      - default
+      - servicebus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: 
+          - node.role == worker
+      restart_policy:
+        delay: 10s
+      resources:
+        reservations:
+          memory: 512M
+        limits:
+          memory: 512M
+      labels:
+        - com.df.notify=true
+        - com.df.alertName.1=clients_per_queue_messages_threshold_passed
+        - com.df.alertIf.1=(sum(rabbitmq_queue_messages_total{queue="list.item.add"})) / 100 - (sum(rabbitmq_queue_consumers{queue="list.item.add"})) > 0
+        - com.df.alertLabels.1=receiver=system,service=list_service,scale=up,type=service
+        - com.df.alertAnnotations.1=summary=The ratio of messages ready in the list.item.add queue to the number of list_service clients is greater than the threshold of 100
+        - com.df.alertPersistent.1=true
+        - com.df.alertName.2=empty_queue_with_clients
+        - com.df.alertIf.2=sum(rabbitmq_queue_messages_total{queue="list.item.add"}) == 0
+        - com.df.alertFor.2=30s
+        - com.df.alertLabels.2=receiver=system,service=list_service,scale=down,type=service
+        - com.df.alertAnnotations.2=summary=The list.item.add queue is empty but there are still list_service tasks
+        - com.df.alertPersistent.2=true
+        - com.df.scaleUpBy=1
+        - com.df.scaleDownBy=1
+        - com.df.scaleMin=0
+        - com.df.scaleMax=3
+        - com.df.reschedule=true

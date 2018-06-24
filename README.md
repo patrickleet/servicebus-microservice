@@ -25,3 +25,29 @@
 
 That's it! The rest is tooling.
 
+
+```
+FROM node:9-alpine 
+
+RUN npm i -g npm@6
+
+ADD . /src
+WORKDIR /src
+RUN npm ci
+RUN npm run lint
+RUN npm run test
+RUN npm prune --production
+
+ENV PORT=3000
+EXPOSE $PORT
+
+ENV DIR=/usr/src/service
+WORKDIR $DIR
+
+RUN npm link
+
+HEALTHCHECK CMD healthcheck
+
+CMD start
+
+```
