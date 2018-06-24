@@ -23,7 +23,7 @@
     "llog": "^0.1.0",
     "pino": "^4.17.3",
     "servicebus": "^2.2.0",
-    "servicebus-bus-common": "^1.1.0",
+    "servicebus-bus-common": "^1.1.1",
     "servicebus-register-handlers": "^0.1.8"
   },
   "devDependencies": {
