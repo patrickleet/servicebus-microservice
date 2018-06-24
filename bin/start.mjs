@@ -28,8 +28,11 @@ registerHandlers({
   queuePrefix
 })
 
-// you probably won't need a api/server for most services
-// but if you want one:
+// you probably won't need a api/server for most services,
+// but there definitely are use cases for them.
+//
+// I wanted you to have a good example of how to do so:
+//
 // eac simply creates an express server using commonly
 // used express middleware, such as prometheus exporters
 // for autoscaling purposes
