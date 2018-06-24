@@ -41,9 +41,9 @@ server.start(config.PORT, onStart)
 
 // Check out my blog for more resources!
 // https://medium.com/@patrickleet
-// 
+//
 // Related Articles:
 // https://hackernoon.com/learning-these-5-microservice-patterns-will-make-you-a-better-engineer-52fc779c470a
 // https://hackernoon.com/what-makes-a-microservice-architecture-14c05ad24554
 // https://codeburst.io/serverless-ish-a-scaling-story-5732945b93ab
-// 
+//
