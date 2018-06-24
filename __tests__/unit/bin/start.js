@@ -12,10 +12,12 @@ jest.mock('express-api-common', () => ({
 describe('./bin/start.mjs', () => {
   it('should start our microservice', () => {
     let errortrap = require('errortrap')
+    let log = require('llog')
 
     let start = require('start.mjs')
     expect(errortrap).toBeCalled()
 
     start.onStart()
+    expect(log.info).toBeCalled()
   })
 })

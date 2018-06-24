@@ -1,5 +1,5 @@
 #!/bin/sh
-':' // # by https://cloudnative.institute ; exec /usr/bin/env node --experimental-modules "$0" "$@"
+':' // # by @patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$@"
 
 import path from 'path'
 import log from 'llog'
@@ -20,13 +20,6 @@ errortrap()
 const bus = sbc.makeBus(config)
 const { queuePrefix } = config
 
-// eac simply creates an express server using commonly
-// used express middleware, such as prometheus exporters
-// for autoscaling purposes
-const server = api.makeServer({
-  logger: log
-})
-
 // Register's all of the files in the folder specified as `path`
 registerHandlers({
   bus,
@@ -35,14 +28,22 @@ registerHandlers({
   queuePrefix
 })
 
+// you probably won't need a api/server for most services
+// but if you want one:
+// eac simply creates an express server using commonly
+// used express middleware, such as prometheus exporters
+// for autoscaling purposes
 export const onStart = () => { log.info('server is running') }
-
-// Starts an express server
-// Using a server in a microservice is NOT required
-// but is useful for certain types of services
+const server = api.makeServer({
+  logger: log
+})
 server.start(config.PORT, onStart)
-
-log.info('service is running')
 
 // Check out my blog for more resources!
 // https://medium.com/@patrickleet
+// 
+// Related Articles:
+// https://hackernoon.com/learning-these-5-microservice-patterns-will-make-you-a-better-engineer-52fc779c470a
+// https://hackernoon.com/what-makes-a-microservice-architecture-14c05ad24554
+// https://codeburst.io/serverless-ish-a-scaling-story-5732945b93ab
+// 

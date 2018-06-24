@@ -5,6 +5,7 @@ export const command = 'list.item.add'
 log.info({msg: `registering ${command}`, command})
 
 export const listen = function ({ type, data, datetime }, done) {
+  const { bus } = this
   const { item } = data
   const { todo, complete } = item
 
@@ -39,6 +40,9 @@ export const listen = function ({ type, data, datetime }, done) {
   // }
   //
   //
+
+  bus.publish('list.item.added')
+
   done()
 }
 
