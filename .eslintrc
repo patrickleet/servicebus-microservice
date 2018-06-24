@@ -3,9 +3,8 @@
     "node": true
   },
   "extends": [
-      "eslint:recommended"
+    "standard"
   ],
-  "parser": "babel-eslint",
   "globals": {
       "gql": true,
       "ga": true,

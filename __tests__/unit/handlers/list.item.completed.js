@@ -1,6 +1,8 @@
-import { event, subscribe } from 'inventory.product.updated.mjs'
+import { event, subscribe } from 'list.item.completed.mjs'
 
-describe('The inventory.product.updated event handler', () => {
+jest.mock('llog')
+
+describe('The list.item.completed event handler', () => {
   it('should exist', () => {
     expect(event).toBeDefined()
     expect(typeof event === 'string').toBe(true)
@@ -11,9 +13,9 @@ describe('The inventory.product.updated event handler', () => {
   it('should handle an event with the subscribe function', () => {
     let mockEventData = {
       data: {
-        product: {
-          title: 'Shirt',
-          quantity: 10
+        item: {
+          todo: 'write this test',
+          completed: true
         }
       }
     }

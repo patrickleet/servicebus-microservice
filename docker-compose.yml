@@ -12,6 +12,7 @@ services:
       - servicebus
     ports:
       - 5672:5672
+      - 15672:15672
 
   redis:
     image: redis
@@ -36,6 +37,6 @@ services:
     networks:
       - servicebus
     depends_on:
-      - rediss
+      - redis
       - rabbitmq
     command: ./bin/microservice.mjs
