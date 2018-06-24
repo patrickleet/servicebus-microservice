@@ -32,26 +32,9 @@ describe('./bin/healthcheck.mjs', () => {
     exit()
     expect(global.process.exit).toBeCalledWith(0)
   })
-  
+
   it('should open connection to amqp', (done) => {
     open.then(() => {
-      done()
-    })
-  })
-
-  it('should catch rejected promises', () => {
-    let amqplib = require('amqplib')
-    amqplib.connect.mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          reject('Error')
-        }, 100)
-      })
-    })
-
-    let open2 = require('healthcheck.mjs').open
-    open2.catch((err) => {
-      expect(err).toBe()
       done()
     })
   })

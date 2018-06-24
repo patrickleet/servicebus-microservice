@@ -8,10 +8,10 @@
   },
   "scripts": {
     "start": "./bin/start.mjs",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src __tests__",
+    "lint": "eslint bin handlers --ext=.js,.mjs",
+    "lint:fix": "eslint --fix bin handlers __tests__ --ext=.js,.mjs",
     "test": "jest --config jest.json --coverage --verbose",
-    "test:staging": "jest --config jest.staging.json --verbose --runInBand",
+    "test:staging": "DEBUG=microservice jest --config jest.staging.json --verbose --runInBand",
     "test:watch": "jest --config jest.json --watch --coverage --verbose",
     "precommit": "npm run lint",
     "prepush": "make ci"
@@ -19,7 +19,7 @@
   "dependencies": {
     "cconfig": "^1.2.4",
     "errortrap": "^1.0.2",
-    "express-api-common": "^3.0.2",
+    "express-api-common": "^4.0.0",
     "llog": "^0.1.0",
     "pino": "^4.17.3",
     "servicebus": "^2.2.0",
@@ -30,10 +30,14 @@
     "babel-jest": "^23.0.1",
     "babel-preset-env": "^1.7.0",
     "debug": "^3.1.0",
-    "eslint": "^4.2.0",
+    "eslint": "^5.0.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "husky": "^0.14.3",
-    "jest": "^21.1.0",
-    "node-fetch": "^1.7.3"
+    "jest": "^23.1.0"
   },
   "license": "ISC",
   "snyk": true

@@ -1,6 +1,8 @@
-import { command, listen } from 'inventory.product.addToInventory.mjs'
+import { command, listen } from 'list.item.add.mjs'
 
-describe('The inventory.product.addToInventory command handler', () => {
+jest.mock('llog')
+
+describe('The list.item.add command handler', () => {
   it('should exist', () => {
     expect(command).toBeDefined()
     expect(typeof command === 'string').toBe(true)
@@ -11,9 +13,9 @@ describe('The inventory.product.addToInventory command handler', () => {
   it('should handle an command with the listen function', () => {
     let mockCommandData = {
       data: {
-        product: {
-          title: 'Shirt',
-          quantity: 10
+        item: {
+          todo: 'write this test',
+          completed: false
         }
       }
     }
