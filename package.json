@@ -21,13 +21,13 @@
     "cconfig": "^1.2.4",
     "errortrap": "^1.0.2",
     "express-api-common": "^4.0.0",
-    "llog": "^0.1.0",
+    "llog": "^0.1.1",
     "pino": "^4.17.3",
     "servicebus-bus-common": "^1.1.1",
-    "servicebus-register-handlers": "^0.1.9",
+    "servicebus-register-handlers": "^0.1.10",
     "sourced": "^0.1.4",
     "sourced-queued-repo": "^1.0.3",
-    "sourced-repo-mongo": "^0.4.0"
+    "sourced-repo-mongo": "^0.4.1"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
