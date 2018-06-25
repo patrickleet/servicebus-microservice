@@ -10,7 +10,7 @@ RUN npm i -g npm@6
 
 ADD . /src
 WORKDIR /src
-RUN npm ci
+RUN npm install
 RUN npm run lint
 RUN npm run test
 RUN npm prune --production

@@ -2,6 +2,8 @@ import log from 'llog'
 
 export const event = 'list.item.completed'
 
+log.info({msg: `registering ${event}`, event})
+
 export const subscribe = function ({ type, datetime, data }, done) {
   const { item } = data
   const { todo, complete } = item

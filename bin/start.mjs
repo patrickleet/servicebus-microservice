@@ -10,6 +10,7 @@ import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
 import api from 'express-api-common'
 import mongoClient from 'sourced-repo-mongo/mongo'
+import fs from 'fs'
 
 // 🔥 Welcome to my opinionated servicebus boilerplate! 🔥
 
@@ -109,6 +110,12 @@ export const start = async (onStart) => {
   //
   // registerHandlers registers all of your handlers from the folder specified.
   //
+  log.debug({
+    msg: 'Registering Handlers',
+    dir: process.cwd(),
+    handlerPath: path.resolve(process.cwd(), 'handlers'),
+    files: fs.readdirSync(path.resolve(process.cwd(), 'handlers'))
+  })
   await registerHandlers({
     bus,
     path: path.resolve(process.cwd(), 'handlers'),

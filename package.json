@@ -25,9 +25,9 @@
     "pino": "^4.17.3",
     "servicebus-bus-common": "^1.1.1",
     "servicebus-register-handlers": "^0.1.10",
-    "sourced": "^0.1.4",
+    "sourced": "^0.1.5",
     "sourced-queued-repo": "^1.0.3",
-    "sourced-repo-mongo": "^0.4.1"
+    "sourced-repo-mongo": "^0.4.2"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
