@@ -1,9 +1,7 @@
-import debugs from 'debug'
 import log from 'llog'
 import { TodoList } from '../lib/models/TodoList'
 import { todoListRepository } from '../lib/repos/todoListRepository.mjs'
 
-const debug = debugs('microservice')
 export const command = 'list.item.add'
 
 log.info({msg: `registering ${command}`, command})
@@ -15,9 +13,6 @@ log.info({msg: `registering ${command}`, command})
 export const listen = async function ({ type, data, datetime }, done) {
   try {
     const { bus } = this
-
-    debug(bus)
-
     const { todoListId, item } = data
     const { todo, complete } = item
 
@@ -35,7 +30,9 @@ export const listen = async function ({ type, data, datetime }, done) {
     try {
       todoList = await todoListRepository.getAsync(todoListId)
     } catch (err) {
-      if (err) return done(err)
+      log.error('Error calling todoListRepository.getAsync')
+      log.error(err)
+      throw new Error({name: 'ERROR_GET_ASYNC'})
     } finally {
       if (!todoList) {
         todoList = new TodoList()
@@ -47,8 +44,6 @@ export const listen = async function ({ type, data, datetime }, done) {
 
       todoList.addItem(item)
 
-      // debug(todoListRepository)
-
       await todoListRepository.commitAsync(todoList)
 
       bus.publish('list.item.added', item)
@@ -57,10 +52,8 @@ export const listen = async function ({ type, data, datetime }, done) {
       done()
     }
   } catch (err) {
-    console.log(err)
-    if (err) { log.error(err) }
+    log.error(err)
     done(`Command Handler Failed for ${command} - ${err}`)
-    throw err
   }
 }
 
