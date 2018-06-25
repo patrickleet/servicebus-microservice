@@ -3,7 +3,7 @@ import log from 'llog'
 import { TodoList } from '../lib/models/TodoList'
 import { todoListRepository } from '../lib/repos/todoListRepository.mjs'
 
-const debug = debugs('register-handlers-handler')
+const debug = debugs('microservice')
 export const command = 'list.item.add'
 
 log.info({msg: `registering ${command}`, command})
@@ -15,6 +15,9 @@ log.info({msg: `registering ${command}`, command})
 export const listen = async function ({ type, data, datetime }, done) {
   try {
     const { bus } = this
+
+    debug(bus)
+
     const { todoListId, item } = data
     const { todo, complete } = item
 
@@ -44,7 +47,7 @@ export const listen = async function ({ type, data, datetime }, done) {
 
       todoList.addItem(item)
 
-      debug(todoListRepository)
+      // debug(todoListRepository)
 
       await todoListRepository.commitAsync(todoList)
 

@@ -6,6 +6,7 @@ jest.mock('servicebus-bus-common')
 jest.mock('../../../config.mjs')
 jest.mock('express-api-common', () => ({
   makeServer: jest.fn(() => ({
+    get: jest.fn(),
     start: jest.fn()
   }))
 }))
