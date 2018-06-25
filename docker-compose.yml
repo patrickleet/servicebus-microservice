@@ -21,6 +21,13 @@ services:
     ports:
       - 6379:6379
 
+  mongo:
+    image: mongo
+    networks:
+      - default
+    ports:
+      - 27017:27017
+
   service:
     image: node:10
     volumes:
@@ -36,7 +43,8 @@ services:
       - NODE_ENV=development
     networks:
       - servicebus
+      - default
     depends_on:
       - redis
       - rabbitmq
-    command: ./bin/microservice.mjs
+    command: node --experimental-modules ./bin/microservice.mjs

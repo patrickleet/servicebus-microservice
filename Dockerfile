@@ -1,4 +1,4 @@
-FROM node:9-alpine as build
+FROM node:10-alpine as build
 
 # install gyp tools
 RUN apk add --update --no-cache \
@@ -16,7 +16,7 @@ RUN npm run test
 RUN npm prune --production
 
 # Install cURL for healthcheck
-FROM node:9-alpine
+FROM node:10-alpine
 
 ENV PORT=3000
 EXPOSE $PORT
@@ -34,4 +34,4 @@ RUN npm link
 
 HEALTHCHECK CMD healthcheck
 
-CMD start
+CMD node --experimental-modules ./bin/start.mjs
