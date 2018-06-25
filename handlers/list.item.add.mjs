@@ -9,8 +9,6 @@ export const listen = function ({ type, data, datetime }, done) {
   const { item } = data
   const { todo, complete } = item
 
-  log.debug({msg: 'DEBUG', that: this})
-
   // JSON logging
   // Great for filtering in Kibana
   log.info({msg: `executing listen handler for ${command}`, command, todo, complete, type, datetime})
@@ -42,6 +40,7 @@ export const listen = function ({ type, data, datetime }, done) {
   //
 
   bus.publish('list.item.added', item)
+  log.info({msg: 'list.item.added', item, done})
 
   done()
 }

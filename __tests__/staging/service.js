@@ -1,5 +1,4 @@
 import debug from 'debug'
-import servicebus from 'servicebus'
 import sbc from 'servicebus-bus-common'
 
 const config = {
@@ -35,51 +34,51 @@ describe('service', () => {
 
   afterAll(() => {
     // give messages some time to send before closing bus
-    setTimeout(() => {
-      log('closing bus')
-      bus.close()
-    }, 100)
+    bus.close()
+    log('closing bus', bus.channels)
+    // bus.channels.forEach(function (channel) {
+    //   channel.close();
+    // });
+    // bus.connection.close();
+
+    log('closed')
   })
 
-  it('list.item.add command', (done) => {
-    let doTest = new Promise((resolve, reject) => {
-      let testCommand = 'list.item.add'
-      let newItem = {
-        item: {
-          todo: 'write tests',
-          complete: false
-        }
+  function flushPromises () {
+    return new Promise(resolve => setImmediate(resolve))
+  }
+
+  it('list.item.add command', async (done) => {
+    let testCommand = 'list.item.add'
+    let newItem = {
+      item: {
+        todo: 'write tests',
+        complete: false
       }
-
-      bus.subscribe('list.item.added', { ack: true }, (event, cb) => {
-        log('received event', event, cb)
-        expect(event).toBeDefined()
-        expect(event.data).toEqual(newItem.item)
-        expect(event.datetime).toBeDefined()
-        expect(event.type).toBe('list.item.added')
-        expect(typeof event.handle.ack).toBe('function')
-        event.handle.ack()
-        resolve()
-      })
-
-      setTimeout(() => {
-        bus.send(testCommand, newItem, { ack: true })
-        log(`sent ${testCommand} command`)
-      }, 500)
-    })
-
-    try {
-      doTest
-        .then(() => {
-          log('list.item.add command test')
-          setTimeout(() => {
-            done()
-          }, 2000)
-        })
-    } catch (e) {
-      log(e)
     }
 
-  })
+    let doTest = () => {
+      return new Promise((resolve, reject) => {
+        bus.subscribe('list.item.added', { ack: true }, (event, cb) => {
+          log('acking message')
+          event.handle.ack(() => {
+            resolve(event)
+          })
+        })
 
+        bus.send(testCommand, newItem, { ack: true })
+        log(`sent ${testCommand} command`)
+      })
+    }
+
+    let event = await doTest()
+
+    expect(event).toBeDefined()
+    expect(event.data).toEqual(newItem.item)
+    expect(event.datetime).toBeDefined()
+    expect(event.type).toBe('list.item.added')
+    expect(typeof event.handle.ack).toBe('function')
+
+    done()
+  })
 })
