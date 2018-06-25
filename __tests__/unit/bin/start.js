@@ -1,3 +1,4 @@
+import { start, onStart } from 'start.mjs'
 jest.mock('llog')
 jest.mock('errortrap', () => jest.fn())
 jest.mock('servicebus-register-handlers')
@@ -14,10 +15,10 @@ describe('./bin/start.mjs', () => {
     let errortrap = require('errortrap')
     let log = require('llog')
 
-    let start = require('start.mjs')
+    start()
     expect(errortrap).toBeCalled()
 
-    start.onStart()
+    onStart()
     expect(log.info).toBeCalled()
   })
 })

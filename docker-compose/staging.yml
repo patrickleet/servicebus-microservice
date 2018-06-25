@@ -2,7 +2,6 @@ version: '3.3'
 
 networks:
   default:
-  rethink:
   servicebus:
 
 services:
@@ -15,21 +14,21 @@ services:
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - DEBUG=servicebus*
+      - DEBUG=servicebus*,register-handlers*
     networks:
       - servicebus
-      - rethink
       - default
     depends_on:
       - redis
       - rabbitmq
-      - rethink
 
   rabbitmq:
     image: rabbitmq:3.6-management
     hostname: rabbitmq
     networks:
       - servicebus
+    ports:
+      - 15672:15672
 
   redis:
     image: redis
@@ -38,13 +37,12 @@ services:
 
   # reinstall dev deps to get testing tools and run staging tests
   staging:
-    image: node:9
+    image: node:10
     volumes:
-      - .:/usr/src/service
+      - ..:/usr/src/service
     working_dir: /usr/src/service
     networks:
       - servicebus
-      - rethink
       - default
     environment:
       - apiUrl=http://staging-deps:3000
