@@ -23,7 +23,8 @@
     "llog": "^0.1.0",
     "pino": "^4.17.3",
     "servicebus-bus-common": "^1.1.1",
-    "servicebus-register-handlers": "^0.1.9"
+    "servicebus-register-handlers": "^0.1.9",
+    "sourced": "^0.1.4"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
@@ -37,7 +38,8 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "husky": "^0.14.3",
-    "jest": "^23.1.0"
+    "jest": "^23.1.0",
+    "readable-id-mjs": "^1.0.0"
   },
   "license": "ISC",
   "snyk": true
