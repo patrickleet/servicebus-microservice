@@ -137,8 +137,6 @@ export const start = async (onStart) => {
   const server = api.makeServer({
     logger: log
   })
-  const sayHello = (req, res) => { res.send('Hello') }
-  server.get('/', sayHello)
   server.start(config.PORT, onStart)
 }
 
