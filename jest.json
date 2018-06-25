@@ -4,6 +4,7 @@
   "modulePaths": [
     "bin",
     "handlers",
+    "lib",
     "/node_modules/"
   ],
   "moduleFileExtensions": [
@@ -23,7 +24,8 @@
   },
   "collectCoverageFrom" : [
     "bin/*.{js,jsx,mjs}",
-    "handlers/*.{js,jsx,mjs}"
+    "handlers/*.{js,jsx,mjs}",
+    "lib/**/*.{js,jsx,mjs}"
   ]
 }  
   
