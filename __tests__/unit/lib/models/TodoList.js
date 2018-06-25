@@ -4,14 +4,13 @@ jest.mock('sourced', () => {
   const EventEmitter = require('events')
   return {
     Entity: class Entity extends EventEmitter {
-      constructor() {
+      constructor () {
         super()
         this.digest = jest.fn()
       }
     }
   }
 })
-
 
 describe('TodoList', () => {
   it('should construct with new items array, and inherit from Entity', () => {

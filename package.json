@@ -17,6 +17,7 @@
     "prepush": "make ci"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "cconfig": "^1.2.4",
     "errortrap": "^1.0.2",
     "express-api-common": "^4.0.0",

@@ -5,11 +5,14 @@ const config = {
   prefetch: 10,
   queuePrefix: 'test-microservice',
   redis: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT
+    host: process.env.REDIS_HOST || 'localhost',
+    port: process.env.REDIS_PORT || '6379'
   },
   rabbitmq: {
-    url: process.env.RABBITMQ_URL
+    url: process.env.RABBITMQ_URL || 'amqp://localhost:5672'
+  },
+  mongo: {
+    url: process.env.MONGO_URL || 'mongodb://localhost:27017/microservice'
   }
 }
 
@@ -44,17 +47,14 @@ describe('service', () => {
     log('closed')
   })
 
-  function flushPromises () {
-    return new Promise(resolve => setImmediate(resolve))
-  }
-
   it('list.item.add command', async (done) => {
     let testCommand = 'list.item.add'
     let newItem = {
       item: {
         todo: 'write tests',
         complete: false
-      }
+      },
+      todoListId: 'test - list.item.add command'
     }
 
     let doTest = () => {
