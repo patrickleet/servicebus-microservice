@@ -14,7 +14,9 @@ services:
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - MONGO_URL=mongodb://mongo:27017/microservice
       - DEBUG=servicebus*,register-handlers*
+      - LOG_LEVEL=10
     networks:
       - servicebus
       - default
@@ -34,6 +36,11 @@ services:
     image: redis
     networks:
       - servicebus
+
+  mongo:
+    image: mongo
+    networks:
+      - default
 
   # reinstall dev deps to get testing tools and run staging tests
   staging:

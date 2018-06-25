@@ -12,6 +12,7 @@ docker-build:
 	docker build -t microservice .
 
 ci:
+	rm -rf node_modules
 	COMPOSE_FILE=./docker-compose/builder.yml \
 	PORT=3000 \
 		make	docker-build \
@@ -55,7 +56,7 @@ installDevOnly:
 
 staging:
 	COMPOSE_FILE=./docker-compose/staging.yml \
-		docker-compose up -d rabbitmq redis
+		docker-compose up -d rabbitmq redis mongo
 	sleep 10
 	COMPOSE_FILE=./docker-compose/staging.yml \
 		docker-compose up -d staging-deps
