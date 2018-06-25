@@ -40,6 +40,7 @@ services:
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - MONGO_URL=mongodb://mongo:27017/microservice
       - NODE_ENV=development
     networks:
       - servicebus
@@ -47,4 +48,4 @@ services:
     depends_on:
       - redis
       - rabbitmq
-    command: node --experimental-modules ./bin/microservice.mjs
+    command: node --experimental-modules ./bin/start.mjs

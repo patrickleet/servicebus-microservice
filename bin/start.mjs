@@ -1,5 +1,5 @@
 #!/bin/sh
-':' // # patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$@"
+':' // # patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$1"
 
 import path from 'path'
 

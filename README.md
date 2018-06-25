@@ -27,7 +27,7 @@ That's it! The rest is tooling.
 
 
 ```
-FROM node:9-alpine 
+FROM node:10
 
 RUN npm i -g npm@6
 

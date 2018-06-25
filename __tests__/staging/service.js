@@ -66,8 +66,10 @@ describe('service', () => {
           })
         })
 
-        bus.send(testCommand, newItem, { ack: true })
-        log(`sent ${testCommand} command`)
+        setTimeout(() => {
+          bus.send(testCommand, newItem, { ack: true })
+          log(`sent ${testCommand} command`)
+        }, 500)
       })
     }
 
