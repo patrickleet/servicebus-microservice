@@ -32,7 +32,7 @@ describe('The list.item.add command handler', () => {
 
     listen.call(context, command, done)
 
-    expect(context.bus.publish).toBeCalledWith('list.item.added')
+    expect(context.bus.publish).toBeCalledWith('list.item.added', {"completed": false, "todo": "write this test"})
     expect(done).toBeCalled()
   })
 })

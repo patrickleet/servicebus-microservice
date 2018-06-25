@@ -1,5 +1,5 @@
 #!/bin/sh
-':' // # by @patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$@"
+':' // # patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$@"
 
 import path from 'path'
 import log from 'llog'
@@ -15,32 +15,36 @@ import api from 'express-api-common'
 // throwing an error
 errortrap()
 
-// sbc's makeBus creates a new instance of servicebus.bus
-// using commonly used servicebus middleware
-const bus = sbc.makeBus(config)
-const { queuePrefix } = config
+export const start = async (onStart) => {
+  // sbc's makeBus creates a new instance of servicebus.bus
+  // using commonly used servicebus middleware
+  const bus = await sbc.makeBus(config)
+  const { queuePrefix } = config
 
-// Register's all of the files in the folder specified as `path`
-registerHandlers({
-  bus,
-  path: path.resolve(process.cwd(), 'handlers'),
-  modules: true,
-  queuePrefix
-})
+  // Register's all of the files in the folder specified as `path`
+  await registerHandlers({
+    bus,
+    path: path.resolve(process.cwd(), 'handlers'),
+    modules: true,
+    queuePrefix
+  })
 
-// you probably won't need a api/server for most services,
-// but there definitely are use cases for them.
-//
-// I wanted you to have a good example of how to do so:
-//
-// eac simply creates an express server using commonly
-// used express middleware, such as prometheus exporters
-// for autoscaling purposes
+  // you probably won't need a api/server for most services,
+  // but there definitely are use cases for them.
+  //
+  // I wanted you to have a good example of how to do so:
+  //
+  // eac simply creates an express server using commonly
+  // used express middleware, such as prometheus exporters
+  // for autoscaling purposes
+  const server = api.makeServer({
+    logger: log
+  })
+  server.start(config.PORT, onStart)
+}
+
 export const onStart = () => { log.info('server is running') }
-const server = api.makeServer({
-  logger: log
-})
-server.start(config.PORT, onStart)
+start(onStart)
 
 // Check out my blog for more resources!
 // https://medium.com/@patrickleet

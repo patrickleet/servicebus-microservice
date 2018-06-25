@@ -55,13 +55,16 @@ installDevOnly:
 
 staging:
 	COMPOSE_FILE=./docker-compose/staging.yml \
-		docker-compose up -d rabbitmq redis rethink rethink2 rethink3
+		docker-compose up -d rabbitmq redis
 	sleep 10
 	COMPOSE_FILE=./docker-compose/staging.yml \
 		docker-compose up -d staging-deps
 	sleep 10
+	make run-staging-tests
+
+run-staging-tests:
 	COMPOSE_FILE=./docker-compose/staging.yml \
-  	docker-compose run --rm staging
+		docker-compose run --rm staging
 
 staging-down:
 	COMPOSE_FILE=./docker-compose/staging.yml \

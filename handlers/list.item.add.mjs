@@ -41,7 +41,7 @@ export const listen = function ({ type, data, datetime }, done) {
   //
   //
 
-  bus.publish('list.item.added')
+  bus.publish('list.item.added', item)
 
   done()
 }

@@ -7,7 +7,7 @@
     "start": "./bin/start.mjs"
   },
   "scripts": {
-    "start": "./bin/start.mjs",
+    "start": "node --experimental-modules ./bin/start.mjs",
     "lint": "eslint bin handlers --ext=.js,.mjs",
     "lint:fix": "eslint --fix bin handlers __tests__ --ext=.js,.mjs",
     "test": "jest --config jest.json --coverage --verbose",
@@ -22,12 +22,13 @@
     "express-api-common": "^4.0.0",
     "llog": "^0.1.0",
     "pino": "^4.17.3",
-    "servicebus": "^2.2.0",
+    "servicebus": "^2.2.1",
     "servicebus-bus-common": "^1.1.1",
-    "servicebus-register-handlers": "^0.1.8"
+    "servicebus-register-handlers": "^0.1.9"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "debug": "^3.1.0",
     "eslint": "^5.0.0",
