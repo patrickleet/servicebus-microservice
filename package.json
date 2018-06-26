@@ -7,7 +7,7 @@
     "start": "./bin/start.mjs"
   },
   "scripts": {
-    "start": "node --experimental-modules ./bin/start.mjs",
+    "start": "node --experimental-modules ./bin/start.mjs | json-stream-formatter --format 'microservice: {{time|date(\"h:m:s\")|blue}}: {{msg|green}}'",
     "lint": "eslint bin handlers --ext=.js,.mjs",
     "lint:fix": "eslint --fix bin handlers __tests__ --ext=.js,.mjs",
     "test": "jest --config jest.json --coverage --verbose",
@@ -42,6 +42,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "husky": "^0.14.3",
     "jest": "^23.1.0",
+    "json-stream-formatter": "0.0.9",
     "readable-id-mjs": "^1.0.0"
   },
   "license": "ISC",

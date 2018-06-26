@@ -5,7 +5,7 @@ build:
     envTemplate:
       template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/microservice:{{.VERSION}}"
   artifacts:
-  - imageName: changeme
+  - imageName: microservice
     workspace: .
     docker: {}
   local: {}

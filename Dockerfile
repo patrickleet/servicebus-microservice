@@ -10,7 +10,7 @@ RUN npm run test
 RUN npm prune --production
 
 ENV PORT=3000
-EXPOSE $PORT
+EXPOSE 3000
 
 RUN npm link
 
