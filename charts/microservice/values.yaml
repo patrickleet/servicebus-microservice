@@ -7,7 +7,7 @@ image:
   tag: dev
   pullPolicy: IfNotPresent
 service:
-  name: microservice
+  name: todolist-model-service
   type: ClusterIP
   externalPort: 80
   internalPort: 3000
@@ -33,17 +33,27 @@ readinessProbe:
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
 
-mongodb:
-  ## MongoDB admin password
-  ## ref: https://github.com/bitnami/bitnami-docker-MongoDB/blob/master/README.md#setting-the-root-password-on-first-run
-  mongodbRootPassword: thisIsForLocal
+servicebus:
 
+  rabbitmq:
+    host: evil-iguana-rabbitmq.servicebus.svc.cluster.local
+    port: 5672
+    user: user
+    password: apassword
+
+  redis:
+    host: hopping-toad-redis-master.servicebus.svc.cluster.local
+    port: 6379
+    password: apassword
+
+mongodb:
   ## MongoDB custom user and database
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
   ##
-  mongodbUsername: mongouser
-  mongodbPassword: mongopassword1!
-  mongodbDatabase: microservice
+  mongodbHost: sourced-db-mongodb.todolist.svc.cluster.local
+  mongodbUsername: username
+  mongodbPassword: apassword
+  mongodbDatabase: sourced
 
   ## Enable persistence using Persistent Volume Claims
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/

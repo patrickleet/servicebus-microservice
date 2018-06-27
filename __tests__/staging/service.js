@@ -3,7 +3,7 @@ import sbc from 'servicebus-bus-common'
 
 const config = {
   prefetch: 10,
-  queuePrefix: 'test-microservice',
+  queuePrefix: 'test-todolist-model-service',
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
     port: process.env.REDIS_PORT || '6379'
@@ -12,11 +12,11 @@ const config = {
     url: process.env.RABBITMQ_URL || 'amqp://localhost:5672'
   },
   mongo: {
-    url: process.env.MONGO_URL || 'mongodb://localhost:27017/microservice'
+    url: process.env.MONGO_URL || 'mongodb://localhost:27017/todolist-model-service'
   }
 }
 
-const log = debug('microservice')
+const log = debug('todolist-model-service')
 
 const rmq = process.env.RABBITMQ_URL || 'amqp://localhost:5672'
 

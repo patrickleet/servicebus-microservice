@@ -14,7 +14,7 @@ jest.mock('express-api-common', () => ({
 jest.mock('sourced-repo-mongo/mongo')
 
 describe('./bin/start.mjs', () => {
-  it('should start our microservice', () => {
+  it('should start our todolist-model-service', () => {
     let errortrap = require('errortrap')
     let log = require('llog')
 

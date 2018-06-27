@@ -18,5 +18,8 @@
       "jasmine": true,
       "beforeAll": true,
       "afterAll": true
+  },
+  "rules": {
+    "spaced-comment": 0
   }
 }

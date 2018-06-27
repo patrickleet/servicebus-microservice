@@ -11,7 +11,7 @@
     "lint": "eslint bin handlers --ext=.js,.mjs",
     "lint:fix": "eslint --fix bin handlers __tests__ --ext=.js,.mjs",
     "test": "jest --config jest.json --coverage --verbose",
-    "test:staging": "DEBUG=microservice jest --config jest.staging.json --verbose --forceExit",
+    "test:staging": "DEBUG=todolist-model-service jest --config jest.staging.json --verbose --forceExit",
     "test:watch": "jest --config jest.json --watch --coverage --verbose",
     "precommit": "npm run lint",
     "prepush": "make ci"
@@ -23,7 +23,7 @@
     "express-api-common": "^4.0.0",
     "llog": "^0.1.1",
     "pino": "^4.17.3",
-    "servicebus-bus-common": "^1.1.1",
+    "servicebus-bus-common": "^1.2.1",
     "servicebus-register-handlers": "^0.1.12",
     "sourced": "^0.1.5",
     "sourced-queued-repo": "^1.0.3",

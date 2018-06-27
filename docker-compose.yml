@@ -37,11 +37,12 @@ services:
     ports:
       - 3000:3000
     environment:
-      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - RABBITMQ_HOST=rabbitmq
       - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MONGO_URL=mongodb://mongo:27017/microservice
+      - MONGODB_HOST=mongo
       - NODE_ENV=development
+      - DEBUG=servicebus*,register-handlers*
+      - LOG_LEVEL=10
     networks:
       - servicebus
       - default

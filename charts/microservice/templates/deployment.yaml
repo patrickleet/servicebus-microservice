@@ -22,38 +22,46 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
+        - name: DEBUG
+          value: ""
         - name: MONGODB_HOST
-          value: {{ template "mongodb.fullname" . }}
+          value: {{ default "" .Values.mongodb.mongodbHost | quote }}
         - name: MONGODB_PORT
           value: "27017"
-        - name: MONGODB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "mongodb.fullname" . }}
-              key: mongodb-root-password
         - name: MONGODB_USERNAME
           value: {{ default "" .Values.mongodb.mongodbUsername | quote }}
         - name: MONGODB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "mongodb.fullname" . }}
-              key: mongodb-password
+          value: {{ default "" .Values.mongodb.mongodbPassword | quote }}
         - name: MONGODB_DATABASE
           value: {{ default "" .Values.mongodb.mongodbDatabase | quote }}
+        - name: RABBITMQ_HOST
+          value: {{ default "" .Values.servicebus.rabbitmq.host | quote }}
+        - name: RABBITMQ_PORT
+          value: {{ default "" .Values.servicebus.rabbitmq.port | quote }}
+        - name: RABBITMQ_USER
+          value: {{ default "" .Values.servicebus.rabbitmq.user | quote }}
+        - name: RABBITMQ_PASSWORD
+          value: {{ default "" .Values.servicebus.rabbitmq.password | quote }}
+        - name: REDIS_HOST
+          value: {{ default "" .Values.servicebus.redis.host | quote }}
+        - name: REDIS_PORT
+          value: {{ default "" .Values.servicebus.redis.port | quote }}
+        - name: REDIS_PASSWORD
+          value: {{ default "" .Values.servicebus.redis.password | quote }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
-          httpGet:
-            path: {{ .Values.probePath }}
-            port: {{ .Values.service.internalPort }}
+          exec:
+            command:
+            - healthcheck
           initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
           successThreshold: {{ .Values.livenessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
         readinessProbe:
-          httpGet:
-            path: {{ .Values.probePath }}
-            port: {{ .Values.service.internalPort }}
+          exec:
+            command:
+            - healthcheck
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}

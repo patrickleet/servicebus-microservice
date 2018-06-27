@@ -1,6 +1,7 @@
-import { exit, open, handleSuccessfulConnection, handleUnsuccessfulConnection } from 'healthcheck.mjs'
+import { exit, check, handleSuccessfulConnection, handleUnsuccessfulConnection } from 'healthcheck.mjs'
 
-jest.mock('amqplib', () => ({
+jest.mock('servicebus-bus-common')
+jest.mock('sourced-repo-mongo/mongo', () => ({
   connect: jest.fn(() => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -33,8 +34,8 @@ describe('./bin/healthcheck.mjs', () => {
     expect(global.process.exit).toBeCalledWith(0)
   })
 
-  it('should open connection to amqp', (done) => {
-    open.then(() => {
+  it('should check connection to amqp', (done) => {
+    check().then(() => {
       done()
     })
   })

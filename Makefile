@@ -9,10 +9,11 @@ setup:
 	make restore-db
 
 docker-build:
-	docker build -t microservice .
+	docker build -t todolist-model-service .
 
 ci:
 	rm -rf node_modules
+	sleep 5
 	COMPOSE_FILE=./docker-compose/builder.yml \
 	PORT=3000 \
 		make	docker-build \

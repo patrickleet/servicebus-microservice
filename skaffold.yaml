@@ -3,9 +3,9 @@ kind: Config
 build:
   tagPolicy:
     envTemplate:
-      template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/microservice:{{.VERSION}}"
+      template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/todolist-model-service:{{.VERSION}}"
   artifacts:
-  - imageName: microservice
+  - imageName: todolist-model-service
     workspace: .
     docker: {}
   local: {}
@@ -17,15 +17,15 @@ profiles:
   build:
     tagPolicy:
       envTemplate:
-        template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/microservice:{{.DIGEST_HEX}}"
+        template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/todolist-model-service:{{.DIGEST_HEX}}"
     artifacts:
     - docker: {}
     local: {}
   deploy:
     helm:
       releases:
-      - name: microservice
+      - name: todolist-model-service
         chartPath: charts/microservice
         setValueTemplates:
-          image.repository: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/microservice"
+          image.repository: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/patrickleet/todolist-model-service"
           image.tag: "{{.TAG}}"

@@ -7,14 +7,13 @@ networks:
 services:
 
   staging-deps:
-    image: microservice
+    image: todolist-model-service
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - RABBITMQ_HOST=rabbitmq
       - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MONGO_URL=mongodb://mongo:27017/microservice
+      - MONGODB_HOST=mongo
       - DEBUG=servicebus*,register-handlers*
       - LOG_LEVEL=10
     networks:

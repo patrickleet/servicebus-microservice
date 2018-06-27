@@ -10,9 +10,9 @@ services:
   service:
     image: patrickleet/list:${TAG}
     environment:
-      - RABBITMQ_URL=amqp://servicebus_rmq1:5672
+      - RABBITMQ_HOST=servicebus_rabbitmq
       - REDIS_HOST=servicebus_redis
-      - REDIS_PORT=6379
+      - MONGODB_HOST=mongo
       - NODE_ENV=production
     networks:
       - default

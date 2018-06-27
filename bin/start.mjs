@@ -1,5 +1,5 @@
 #!/bin/sh
-':' // # patrickleet ; exec /usr/bin/env node --experimental-modules "$0" "$1"
+':' //# https://cloudnative.institute ; exec /usr/bin/env node --experimental-modules "$0" "$1"
 
 import path from 'path'
 
@@ -10,7 +10,6 @@ import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
 import api from 'express-api-common'
 import mongoClient from 'sourced-repo-mongo/mongo'
-import fs from 'fs'
 
 // 🔥 Welcome to my opinionated servicebus boilerplate! 🔥
 
@@ -36,7 +35,7 @@ export const start = async (onStart) => {
   // For now, we just need to set up the mongodb client
   log.info('connecting to mongo')
   try {
-    await mongoClient.connect(config.mongo.url)
+    await mongoClient.connect(config.sourced.mongo.url)
   } catch (err) {
     log.error(err)
     throw new Error('Error connecting to mongo')
@@ -61,10 +60,11 @@ export const start = async (onStart) => {
   // Here's a really great video about it from the library's author, and good friend Matt Walters:
   // https://www.youtube.com/watch?v=4k7bLtqXb8c
   //
-  const bus = await servicebus.makeBus(config)
-  const { queuePrefix } = config
+  log.info('connecting to servicebus')
+  const bus = await servicebus.makeBus(config.servicebus)
+  log.info('connected to servicebus')
 
-  // Register's all of the files in the folder specified as `path`
+  // Next we need to register the "handlers" with the bus.
   //
   // Handlers are the special sauce of microservices
   //
@@ -110,18 +110,15 @@ export const start = async (onStart) => {
   //
   // registerHandlers registers all of your handlers from the folder specified.
   //
-  log.debug({
-    msg: 'Registering Handlers',
-    dir: process.cwd(),
-    handlerPath: path.resolve(process.cwd(), 'handlers'),
-    files: fs.readdirSync(path.resolve(process.cwd(), 'handlers'))
-  })
+  log.info('registering handlers')
+  const { queuePrefix } = config.servicebus
   await registerHandlers({
     bus,
     path: path.resolve(process.cwd(), 'handlers'),
     modules: true,
     queuePrefix
   })
+  log.info('registering handlers')
 
   //
   // you probably won't need a api/server for most services,
