@@ -1,4 +1,4 @@
-# servicebus-microservice
+# todolist-model-service
 
 ## Explore the Code
 
@@ -25,29 +25,10 @@
 
 That's it! The rest is tooling.
 
-
 ```
-FROM node:10
-
-RUN npm i -g npm@6
-
-ADD . /src
-WORKDIR /src
-RUN npm ci
-RUN npm run lint
-RUN npm run test
-RUN npm prune --production
-
-ENV PORT=3000
-EXPOSE $PORT
-
-ENV DIR=/usr/src/service
-WORKDIR $DIR
-
-RUN npm link
-
-HEALTHCHECK CMD healthcheck
-
-CMD start
-
+helm install --namespace servicebus stable/rabbitmq
+helm install --namespace servicebus stable/redis
+helm install --namespace todolist --name sourced-db  stable/mongodb\
+  --set mongodbRootPassword=asecretpassword,mongodbUsername=username,mongodbPassword=apassword,mongodbDatabase=sourced \
+    stable/mongodb
 ```

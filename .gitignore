@@ -65,4 +65,4 @@ dist
 jest_0
 .queues
 .queues.*
-docker/sql/db/*
+secrets

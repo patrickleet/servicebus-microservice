@@ -16,4 +16,4 @@ RUN npm link
 
 HEALTHCHECK CMD healthcheck
 
-CMD start
+CMD node --experimental-modules ./bin/start.mjs

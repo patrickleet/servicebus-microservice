@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
       ORG               = 'patrickleet'
-      APP_NAME          = 'microservice'
+      APP_NAME          = 'todolist-model-service'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }
     stages {
@@ -72,6 +72,7 @@ pipeline {
         steps {
           dir ('./charts/microservice') {
             container('nodejs') {
+              sh 'helm init --client-only'
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
 
               // release the helm chart
