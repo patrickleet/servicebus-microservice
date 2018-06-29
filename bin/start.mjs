@@ -8,17 +8,9 @@ import errortrap from 'errortrap'
 import registerHandlers from 'servicebus-register-handlers'
 import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
-import api from 'express-api-common'
 import mongoClient from 'sourced-repo-mongo/mongo'
 
 // 🔥 Welcome to my opinionated servicebus boilerplate! 🔥
-
-// This is an example of a "model" service, because that is the most complex :)
-// This model service doesn't need an API, so in reality, I'd delete that after using this as a template
-// but it's here so you have a working example for some services that you might want an API for
-//
-// More info:
-// https://hackernoon.com/learning-these-5-microservice-patterns-will-make-you-a-better-engineer-52fc779c470a
 
 // errortrap logs uncaught exceptions with llog before
 // throwing an error
@@ -118,30 +110,9 @@ export const start = async (onStart) => {
     modules: true,
     queuePrefix
   })
-  log.info('registering handlers')
+  log.info('registered handlers')
 
-  //
-  // you probably won't need a api/server for most services,
-  // but there definitely are use cases for them.
-  //
-  // I wanted you to have a good example of how to do so:
-  //
-  // "express-api-common" simply creates an express server using commonly
-  // used express middleware, such as prometheus exporters
-  // for autoscaling purposes
-  //
-  // "log" is an instance of llog, a "leveled logger".
-  // It's actually just logging with pino, but it is a singleton
-  // so you don't need to create it elsewhere, which can throw off your logs
-  // by saying the file it came from is the singleton file, which is much less helpful!
-  //
-  // I'm assuming your logging strategy is "log to stdout" and pick it up with an external tool.
-  // Microservices shouldn't have to care about shipping logs.
-  //
-  const server = api.makeServer({
-    logger: log
-  })
-  server.start(config.PORT, onStart)
+  onStart()
 }
 
 export const onStart = () => { log.info('server is running') }

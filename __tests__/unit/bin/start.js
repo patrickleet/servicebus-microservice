@@ -4,12 +4,6 @@ jest.mock('errortrap', () => jest.fn())
 jest.mock('servicebus-register-handlers')
 jest.mock('servicebus-bus-common')
 jest.mock('../../../config.mjs')
-jest.mock('express-api-common', () => ({
-  makeServer: jest.fn(() => ({
-    get: jest.fn(),
-    start: jest.fn()
-  }))
-}))
 // jest.mock('sourced-repo-mongo')
 jest.mock('sourced-repo-mongo/mongo')
 

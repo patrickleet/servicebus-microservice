@@ -1,14 +1,22 @@
-# todolist-model-service
+# model-microservice-template
+
+This is an example of a "model" microservice, because that is the most complex :)
+
+It uses Event Sourcing with `sourced`.
+
+This model service doesn't need an HTTP API, to see an example of using servicebus
+with an API, check out: https://github.com/patrickleet/servicebus-api-template
+
+More info:
+https://hackernoon.com/learning-these-5-microservice-patterns-will-make-you-a-better-engineer-52fc779c470a
 
 ## Explore the Code
 
 `./bin/start.mjs`
 * Starts the application:
+  1. Connects to DB
   1. Configures a bus
   1. Registers command/event handlers with `servicebus-register-handlers`
-  1. (Optionally) Configures an API server
-  1. Starts the API server
-* You shouldn't have to do much here except maybe configure a server if you want to or apply custom middleware
 * If you find the "common" settings don't work for you, it's easy to use your own!
 
 `./handlers/*`
