@@ -18,13 +18,13 @@ describe('./bin/healthcheck.mjs', () => {
 
   it('should exit when unhealthy', () => {
     global.process.exit = jest.fn()
-    exit({healthy: false})
+    exit({ healthy: false })
     expect(global.process.exit).toBeCalledWith(1)
   })
 
   it('should not exit if healthy', () => {
     global.process.exit = jest.fn()
-    exit({healthy: true})
+    exit({ healthy: true })
     expect(global.process.exit).toBeCalledWith(0)
   })
 
@@ -44,13 +44,13 @@ describe('./bin/healthcheck.mjs', () => {
     let mockExit = jest.fn()
     let fn = handleSuccessfulConnection(mockExit)
     fn()
-    expect(mockExit).toBeCalledWith({healthy: true})
+    expect(mockExit).toBeCalledWith({ healthy: true })
   })
 
   it('should handleUnsuccessfulConnection by calling exit with {healthy: false}', () => {
     let mockExit = jest.fn()
     let fn = handleUnsuccessfulConnection(mockExit)
     fn('test error')
-    expect(mockExit).toBeCalledWith({healthy: false})
+    expect(mockExit).toBeCalledWith({ healthy: false })
   })
 })

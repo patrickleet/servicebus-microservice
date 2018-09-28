@@ -6,6 +6,18 @@ jest.mock('sourced-repo-mongo', () => {
   }
 })
 
+jest.mock('sourced', () => {
+  const EventEmitter = require('events')
+  return {
+    SourcedEntity: class SourcedEntity extends EventEmitter {
+      constructor () {
+        super()
+        this.digest = jest.fn()
+      }
+    }
+  }
+})
+
 describe('repos/todoListRepository', () => {
   it('is a singleton', () => {
     let repo = require('sourced-repo-mongo')

@@ -3,7 +3,7 @@ import { TodoList } from 'models/TodoList'
 jest.mock('sourced', () => {
   const EventEmitter = require('events')
   return {
-    Entity: class Entity extends EventEmitter {
+    SourcedEntity: class SourcedEntity extends EventEmitter {
       constructor () {
         super()
         this.digest = jest.fn()

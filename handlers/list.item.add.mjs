@@ -4,7 +4,7 @@ import { todoListRepository } from '../lib/repos/todoListRepository.mjs'
 
 export const command = 'list.item.add'
 
-log.info({msg: `registering ${command}`, command})
+log.info({ msg: `registering ${command}`, command })
 
 //
 // WARNING: You can not use an () => {} function here, because the context
@@ -20,7 +20,7 @@ export const listen = async function ({ type, data, datetime }, done) {
 
     // JSON logging
     // Great for filtering in Kibana
-    log.info({msg: `executing listen handler for ${command}`, command, todo, complete, type, datetime})
+    log.info({ msg: `executing listen handler for ${command}`, command, todo, complete, type, datetime })
 
     // do something, if it's a model, probably with a repository pattern
     //  * I'm using sourced, and sourced-repo-mongo in this example
@@ -32,7 +32,7 @@ export const listen = async function ({ type, data, datetime }, done) {
     } catch (err) {
       log.error('Error calling todoListRepository.getAsync')
       log.error(err)
-      throw new Error({name: 'ERROR_GET_ASYNC'})
+      throw new Error({ name: 'ERROR_GET_ASYNC' })
     } finally {
       if (!todoList) {
         todoList = new TodoList()
@@ -47,7 +47,7 @@ export const listen = async function ({ type, data, datetime }, done) {
       await todoListRepository.commitAsync(todoList)
 
       bus.publish('list.item.added', item)
-      log.info({msg: 'list.item.added', item})
+      log.info({ msg: 'list.item.added', item })
 
       done()
     }

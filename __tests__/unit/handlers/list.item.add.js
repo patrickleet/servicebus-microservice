@@ -78,7 +78,7 @@ describe('The list.item.add command handler', () => {
     }
 
     let cb = jest.fn(() => {
-      expect(context.bus.publish).toBeCalledWith('list.item.added', {'completed': false, 'todo': 'write this test'})
+      expect(context.bus.publish).toBeCalledWith('list.item.added', { 'completed': false, 'todo': 'write this test' })
       expect(cb).toBeCalled()
       done()
     })
@@ -106,7 +106,7 @@ describe('The list.item.add command handler', () => {
     }
 
     let cb = jest.fn(() => {
-      expect(context.bus.publish).toBeCalledWith('list.item.added', {'completed': false, 'todo': 'write this test'})
+      expect(context.bus.publish).toBeCalledWith('list.item.added', { 'completed': false, 'todo': 'write this test' })
       expect(cb).toBeCalled()
       done()
     })
