@@ -33,24 +33,25 @@ export const listen = async function ({ type, data, datetime }, done) {
       log.error('Error calling todoListRepository.getAsync')
       log.error(err)
       throw new Error({ name: 'ERROR_GET_ASYNC' })
-    } finally {
-      if (!todoList) {
-        todoList = new TodoList()
-
-        todoList.initialize({
-          id: todoListId
-        })
-      }
-
-      todoList.addItem(item)
-
-      await todoListRepository.commitAsync(todoList)
-
-      bus.publish('list.item.added', item)
-      log.info({ msg: 'list.item.added', item })
-
-      done()
     }
+
+    if (!todoList) {
+      todoList = new TodoList()
+
+      todoList.initialize({
+        id: todoListId
+      })
+    }
+
+    todoList.addItem(item)
+
+    await todoListRepository.commitAsync(todoList)
+
+    bus.publish('list.item.added', item)
+    log.info({ msg: 'list.item.added', item })
+
+    done()
+
   } catch (err) {
     log.error(err)
     done(`Command Handler Failed for ${command} - ${err}`)
