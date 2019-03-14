@@ -23,7 +23,7 @@
     "llog": "0.2.0",
     "pino": "5.9.0",
     "servicebus-bus-common": "1.2.3",
-    "servicebus-register-handlers": "0.1.12",
+    "servicebus-register-handlers": "0.2.2",
     "sourced": "2.0.0",
     "sourced-queued-repo": "1.0.3",
     "sourced-repo-mongo": "0.5.0"
