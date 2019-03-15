@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "bluebird": "3.5.3",
-    "cconfig": "1.2.4",
+    "cconfig": "2.0.2",
     "errortrap": "1.0.2",
     "llog": "0.1.1",
     "pino": "5.9.0",
