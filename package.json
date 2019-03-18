@@ -22,7 +22,7 @@
     "errortrap": "1.0.2",
     "llog": "0.2.0",
     "pino": "5.11.1",
-    "servicebus-bus-common": "1.2.3",
+    "servicebus-bus-common": "1.2.4",
     "servicebus-register-handlers": "0.2.2",
     "sourced": "2.0.0",
     "sourced-queued-repo": "1.0.3",
