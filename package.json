@@ -21,7 +21,7 @@
     "cconfig": "2.0.2",
     "errortrap": "1.0.2",
     "llog": "0.2.0",
-    "pino": "5.12.3",
+    "pino": "5.12.6",
     "servicebus-bus-common": "1.2.4",
     "servicebus-register-handlers": "0.2.2",
     "sourced": "2.0.4",
