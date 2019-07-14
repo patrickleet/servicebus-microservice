@@ -26,7 +26,7 @@
     "servicebus-register-handlers": "0.2.2",
     "sourced": "2.0.5",
     "sourced-queued-repo": "1.0.3",
-    "sourced-repo-mongo": "0.6.0"
+    "sourced-repo-mongo": "0.6.1"
   },
   "devDependencies": {
     "babel-jest": "24.8.0",
