@@ -1,7 +1,7 @@
 import { start, onStart } from 'start.mjs'
 jest.mock('llog')
 jest.mock('errortrap', () => jest.fn())
-jest.mock('servicebus-register-handlers')
+jest.mock('@servicebus/register-handlers')
 jest.mock('servicebus-bus-common')
 jest.mock('../../../config.mjs')
 // jest.mock('sourced-repo-mongo')

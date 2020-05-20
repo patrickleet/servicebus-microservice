@@ -5,7 +5,7 @@ import path from 'path'
 
 import log from 'llog'
 import errortrap from 'errortrap'
-import registerHandlers from 'servicebus-register-handlers'
+import registerHandlers from '@servicebus/register-handlers'
 import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
 import mongoClient from 'sourced-repo-mongo/mongo'
