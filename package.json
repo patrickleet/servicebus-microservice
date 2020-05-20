@@ -17,7 +17,7 @@
     "prepush": "make ci"
   },
   "dependencies": {
-    "@servicebus/register-handlers": "^1.0.0",
+    "@servicebus/register-handlers": "1.0.0",
     "bluebird": "3.7.2",
     "cconfig": "2.0.2",
     "errortrap": "1.0.2",
@@ -29,9 +29,9 @@
     "sourced-repo-mongo": "0.6.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "babel-jest": "^26.0.1",
+    "@babel/plugin-transform-runtime": "7.9.6",
+    "@babel/preset-env": "7.9.6",
+    "babel-jest": "26.0.1",
     "debug": "4.1.1",
     "eslint": "7.0.0",
     "eslint-config-standard": "14.1.1",
