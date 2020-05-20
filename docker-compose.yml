@@ -49,4 +49,4 @@ services:
     depends_on:
       - redis
       - rabbitmq
-    command: node --experimental-modules ./bin/start.mjs
+    command: node ./bin/start.mjs

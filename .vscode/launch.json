@@ -10,9 +10,6 @@
       "name": "Debug",
       "cwd": "${workspaceRoot}",
       "program": "${workspaceRoot}/bin/start.mjs",
-      "runtimeArgs": [
-        "--experimental-modules"
-      ],
       "skipFiles": [
         "node_modules/**/*.js"
       ]

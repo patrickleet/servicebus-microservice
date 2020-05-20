@@ -1,6 +1,3 @@
-#!/bin/sh
-':' //# https://cloudnative.institute ; exec /usr/bin/env node --experimental-modules "$0" "$@"
-
 import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
 import mongoClient from 'sourced-repo-mongo/mongo'
