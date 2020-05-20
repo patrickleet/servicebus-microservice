@@ -8,7 +8,7 @@ import errortrap from 'errortrap'
 import registerHandlers from '@servicebus/register-handlers'
 import servicebus from 'servicebus-bus-common'
 import { config } from '../config.mjs'
-import mongoClient from 'sourced-repo-mongo/mongo'
+import mongoClient from 'sourced-repo-mongo/mongo.js'
 
 // 🔥 Welcome to my opinionated servicebus boilerplate! 🔥
 
