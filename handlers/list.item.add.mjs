@@ -51,7 +51,6 @@ export const listen = async function ({ type, data, datetime }, done) {
     log.info({ msg: 'list.item.added', item })
 
     done()
-
   } catch (err) {
     log.error(err)
     done(`Command Handler Failed for ${command} - ${err}`)

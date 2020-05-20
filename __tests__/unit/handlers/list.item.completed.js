@@ -11,7 +11,7 @@ describe('The list.item.completed event handler', () => {
   })
 
   it('should handle an event with the subscribe function', () => {
-    let mockEventData = {
+    const mockEventData = {
       data: {
         item: {
           todo: 'write this test',
@@ -20,7 +20,7 @@ describe('The list.item.completed event handler', () => {
       }
     }
 
-    let done = jest.fn()
+    const done = jest.fn()
 
     subscribe(mockEventData, done)
 

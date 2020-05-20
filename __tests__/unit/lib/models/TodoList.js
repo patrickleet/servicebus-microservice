@@ -1,20 +1,10 @@
 import { TodoList } from 'models/TodoList'
 
-jest.mock('sourced', () => {
-  const EventEmitter = require('events')
-  return {
-    SourcedEntity: class SourcedEntity extends EventEmitter {
-      constructor () {
-        super()
-        this.digest = jest.fn()
-      }
-    }
-  }
-})
+TodoList.prototype.digest = jest.fn();
 
-describe('TodoList', () => {
+describe.only('TodoList', () => {
   it('should construct with new items array, and inherit from Entity', () => {
-    let todoList = new TodoList()
+    const todoList = new TodoList()
 
     expect(todoList.items.length).toBe(0)
     expect(typeof todoList.digest).toBe('function')
@@ -37,8 +27,8 @@ describe('TodoList', () => {
   })
 
   it('should add items with addItem', (done) => {
-    let todoList = new TodoList()
-    let newItem = {
+    const todoList = new TodoList()
+    const newItem = {
       id: 'rocket-ship-54',
       todo: 'Make this',
       complete: false
@@ -57,8 +47,8 @@ describe('TodoList', () => {
   })
 
   it('should throw an error when items are missing todo when calling addItem', () => {
-    let todoList = new TodoList()
-    let newItem = {
+    const todoList = new TodoList()
+    const newItem = {
       id: 'rocket-ship-54',
       complete: false
     }
@@ -68,8 +58,8 @@ describe('TodoList', () => {
   })
 
   it('should generate and id when calling addItem', (done) => {
-    let todoList = new TodoList()
-    let newItem = {
+    const todoList = new TodoList()
+    const newItem = {
       todo: 'this test'
     }
 
@@ -83,8 +73,8 @@ describe('TodoList', () => {
   })
 
   it('should mark specified item as complete when markAsComplete is called', (done) => {
-    let todoList = new TodoList()
-    let newItem = {
+    const todoList = new TodoList()
+    const newItem = {
       id: 'space-hat-31',
       todo: 'Make this',
       complete: false

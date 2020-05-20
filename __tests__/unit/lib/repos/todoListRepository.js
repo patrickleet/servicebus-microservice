@@ -20,10 +20,10 @@ jest.mock('sourced', () => {
 
 describe('repos/todoListRepository', () => {
   it('is a singleton', () => {
-    let repo = require('sourced-repo-mongo')
+    const repo = require('sourced-repo-mongo')
 
-    let todoListRepository2 = require('repos/todoListRepository.mjs').todoListRepository
-    let todoListRepository3 = require('repos/todoListRepository.mjs').todoListRepository
+    const todoListRepository2 = require('repos/todoListRepository.mjs').todoListRepository
+    const todoListRepository3 = require('repos/todoListRepository.mjs').todoListRepository
 
     expect(repo.Repository).toHaveBeenCalledTimes(1)
     expect(todoListRepository).toBeDefined()

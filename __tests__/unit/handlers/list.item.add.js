@@ -2,7 +2,7 @@ import { command, listen } from 'list.item.add.mjs'
 
 jest.mock('llog')
 jest.mock('models/TodoList', () => {
-  let Entity = require('sourced').Entity
+  const Entity = require('sourced').Entity
   class TodoList extends Entity {
     constructor () {
       super()
@@ -14,11 +14,11 @@ jest.mock('models/TodoList', () => {
   return { TodoList }
 })
 jest.mock('repos/todoListRepository', () => {
-  let TodoList = require('models/TodoList').TodoList
+  const TodoList = require('models/TodoList').TodoList
   return {
     todoListRepository: {
       getAsync: jest.fn(() => new Promise((resolve) => {
-        let todoList = new TodoList()
+        const todoList = new TodoList()
         todoList.initialize({ id: 'list-item-add-test' })
         resolve(todoList)
       })),
@@ -36,7 +36,7 @@ describe('The list.item.add command handler', () => {
   })
 
   it('should call callback with error when called without a todoListId', (done) => {
-    let command = {
+    const command = {
       type: 'list.item.add',
       data: {
         item: {
@@ -44,13 +44,13 @@ describe('The list.item.add command handler', () => {
         }
       }
     }
-    let context = {
+    const context = {
       bus: {
         publish: jest.fn()
       }
     }
 
-    let cb = jest.fn((err) => {
+    const cb = jest.fn((err) => {
       expect(err).toBe('Command Handler Failed for list.item.add - Error: list.item.add - todoListId must be defined!')
       done()
     })
@@ -59,7 +59,7 @@ describe('The list.item.add command handler', () => {
   })
 
   it('should handle an command with the listen function', (done) => {
-    let command = {
+    const command = {
       type: 'list.item.add',
       data: {
         todoListId: 'test',
@@ -71,14 +71,14 @@ describe('The list.item.add command handler', () => {
       datetime: new Date()
     }
 
-    let context = {
+    const context = {
       bus: {
         publish: jest.fn()
       }
     }
 
-    let cb = jest.fn(() => {
-      expect(context.bus.publish).toBeCalledWith('list.item.added', { 'completed': false, 'todo': 'write this test' })
+    const cb = jest.fn(() => {
+      expect(context.bus.publish).toBeCalledWith('list.item.added', { completed: false, todo: 'write this test' })
       expect(cb).toBeCalled()
       done()
     })
@@ -87,7 +87,7 @@ describe('The list.item.add command handler', () => {
   })
 
   it('should handle an command with the listen function', (done) => {
-    let command = {
+    const command = {
       type: 'list.item.add',
       data: {
         todoListId: 'test',
@@ -99,14 +99,14 @@ describe('The list.item.add command handler', () => {
       datetime: new Date()
     }
 
-    let context = {
+    const context = {
       bus: {
         publish: jest.fn()
       }
     }
 
-    let cb = jest.fn(() => {
-      expect(context.bus.publish).toBeCalledWith('list.item.added', { 'completed': false, 'todo': 'write this test' })
+    const cb = jest.fn(() => {
+      expect(context.bus.publish).toBeCalledWith('list.item.added', { completed: false, todo: 'write this test' })
       expect(cb).toBeCalled()
       done()
     })
@@ -115,7 +115,7 @@ describe('The list.item.add command handler', () => {
   })
 
   it('throw an error if one occurs while getting the repository', (done) => {
-    let command = {
+    const command = {
       type: 'list.item.add',
       data: {
         todoListId: 'test',
@@ -127,18 +127,18 @@ describe('The list.item.add command handler', () => {
       datetime: new Date()
     }
 
-    let context = {
+    const context = {
       bus: {
         publish: jest.fn()
       }
     }
 
-    let cb = jest.fn((err) => {
+    const cb = jest.fn((err) => {
       expect(err).toBeDefined()
       done()
     })
 
-    let todoListRepository = require('repos/todoListRepository').todoListRepository
+    const todoListRepository = require('repos/todoListRepository').todoListRepository
     todoListRepository.getAsync = jest.fn(() => new Promise((resolve, reject) => { reject(new Error('Repo Error')) }))
 
     listen.call(context, command, cb)
