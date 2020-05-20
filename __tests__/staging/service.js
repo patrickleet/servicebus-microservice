@@ -1,5 +1,5 @@
 import debug from 'debug'
-import sbc from 'servicebus-bus-common'
+import { makeBus } from 'servicebus-bus-common'
 
 const config = {
   prefetch: 10,
@@ -30,7 +30,7 @@ describe('service', () => {
   beforeAll(async function (done) {
     log('preparing for tests')
 
-    bus = await sbc.makeBus(config)
+    bus = await makeBus(config)
 
     done()
   })

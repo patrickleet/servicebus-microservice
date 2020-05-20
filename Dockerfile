@@ -3,8 +3,8 @@ FROM node:14
 ADD . /src
 WORKDIR /src
 RUN npm ci
-# RUN npm run lint
-# RUN npm run test
+RUN npm run lint
+RUN npm run test
 RUN npm prune --production
 
 ENV PORT=3000

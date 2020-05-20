@@ -143,4 +143,34 @@ describe('The list.item.add command handler', () => {
 
     listen.call(context, command, cb)
   })
+  
+  it('creates new instance if none found in repository', (done) => {
+    const command = {
+      type: 'list.item.add',
+      data: {
+        todoListId: 'test',
+        item: {
+          todo: 'write this test',
+          completed: false
+        }
+      },
+      datetime: new Date()
+    }
+
+    const context = {
+      bus: {
+        publish: jest.fn()
+      }
+    }
+
+    const cb = jest.fn((err) => {
+      expect(err).toBeDefined()
+      done()
+    })
+
+    const todoListRepository = require('repos/todoListRepository').todoListRepository
+    todoListRepository.getAsync = jest.fn(() => new Promise((resolve, reject) => { resolve(null) }))
+
+    listen.call(context, command, cb)
+  })
 })
