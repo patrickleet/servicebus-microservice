@@ -11,19 +11,19 @@
     "lint": "eslint bin lib handlers --ext=.js,.mjs",
     "lint:fix": "eslint --fix bin lib handlers __tests__ --ext=.js,.mjs",
     "test": "jest --config jest.json --coverage --verbose",
-    "test:staging": "DEBUG=todolist-model-service jest --config jest.staging.json --verbose --forceExit",
+    "test:staging": "DEBUG=todolist-model-service,servicebus* jest --config jest.staging.json --verbose --forceExit",
     "test:watch": "jest --config jest.json --watch --coverage --verbose",
     "precommit": "npm run lint",
     "prepush": "make ci"
   },
   "dependencies": {
+    "@servicebus/register-handlers": "^1.0.0",
     "bluebird": "3.7.2",
     "cconfig": "2.0.2",
     "errortrap": "1.0.2",
     "llog": "0.2.0",
     "pino": "6.2.1",
     "servicebus-bus-common": "1.3.0",
-    "servicebus-register-handlers": "0.2.2",
     "sourced": "2.0.6",
     "sourced-queued-repo": "1.0.3",
     "sourced-repo-mongo": "0.6.1"

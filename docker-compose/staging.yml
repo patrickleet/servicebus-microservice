@@ -43,7 +43,7 @@ services:
 
   # reinstall dev deps to get testing tools and run staging tests
   staging:
-    image: node:10
+    image: node:14
     volumes:
       - ..:/usr/src/service
     working_dir: /usr/src/service

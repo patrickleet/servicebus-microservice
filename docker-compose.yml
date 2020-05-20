@@ -29,7 +29,7 @@ services:
       - 27017:27017
 
   service:
-    image: node:10
+    image: node:14
     volumes:
       - .:/usr/src/app/
     working_dir: /usr/src/app/
