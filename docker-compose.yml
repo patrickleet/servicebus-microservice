@@ -6,7 +6,7 @@ networks:
 services:
 
   rabbitmq:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.8-management
     hostname: rabbitmq
     networks:
       - servicebus
