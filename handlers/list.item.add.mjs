@@ -1,5 +1,5 @@
 import log from 'llog'
-import { TodoList } from '../lib/models/TodoList'
+import { TodoList } from '../lib/models/TodoList.mjs'
 import { todoListRepository } from '../lib/repos/todoListRepository.mjs'
 
 export const command = 'list.item.add'
