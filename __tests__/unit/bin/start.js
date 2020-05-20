@@ -9,8 +9,8 @@ jest.mock('sourced-repo-mongo/mongo')
 
 describe('./bin/start.mjs', () => {
   it('should start our todolist-model-service', () => {
-    let errortrap = require('errortrap')
-    let log = require('llog')
+    const errortrap = require('errortrap')
+    const log = require('llog')
 
     start()
     expect(errortrap).toBeCalled()
@@ -20,7 +20,7 @@ describe('./bin/start.mjs', () => {
   })
 
   it('should throw an error if it cant connect to mongo', () => {
-    let mongoClient = require('sourced-repo-mongo/mongo')
+    const mongoClient = require('sourced-repo-mongo/mongo')
     mongoClient.connect = jest.fn(() => new Promise((resolve, reject) => { reject(new Error('MongoDB Error')) }))
     const onStart = jest.fn()
     expect(start(onStart)).rejects.toEqual(new Error('Error connecting to mongo'))

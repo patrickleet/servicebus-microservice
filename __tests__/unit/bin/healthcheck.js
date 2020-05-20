@@ -41,15 +41,15 @@ describe('./bin/healthcheck.mjs', () => {
   })
 
   it('should handleSuccessfulConnection by calling exit with {healthy: true}', () => {
-    let mockExit = jest.fn()
-    let fn = handleSuccessfulConnection(mockExit)
+    const mockExit = jest.fn()
+    const fn = handleSuccessfulConnection(mockExit)
     fn()
     expect(mockExit).toBeCalledWith({ healthy: true })
   })
 
   it('should handleUnsuccessfulConnection by calling exit with {healthy: false}', () => {
-    let mockExit = jest.fn()
-    let fn = handleUnsuccessfulConnection(mockExit)
+    const mockExit = jest.fn()
+    const fn = handleUnsuccessfulConnection(mockExit)
     fn('test error')
     expect(mockExit).toBeCalledWith({ healthy: false })
   })

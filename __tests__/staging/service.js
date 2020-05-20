@@ -48,8 +48,8 @@ describe('service', () => {
   })
 
   it('list.item.add command', async (done) => {
-    let testCommand = 'list.item.add'
-    let newItem = {
+    const testCommand = 'list.item.add'
+    const newItem = {
       item: {
         todo: 'write tests',
         complete: false
@@ -57,7 +57,7 @@ describe('service', () => {
       todoListId: 'test - list.item.add command'
     }
 
-    let doTest = () => {
+    const doTest = () => {
       return new Promise((resolve, reject) => {
         bus.subscribe('list.item.added', { ack: true }, (event, cb) => {
           log('acking message')
@@ -73,7 +73,7 @@ describe('service', () => {
       })
     }
 
-    let event = await doTest()
+    const event = await doTest()
 
     expect(event).toBeDefined()
     expect(event.data).toEqual(newItem.item)
