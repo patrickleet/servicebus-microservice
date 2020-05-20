@@ -1,6 +1,8 @@
 import { TodoList } from 'models/TodoList'
 
+// digest and enqueue work with repositories - we don't have a repository in these tests 
 TodoList.prototype.digest = jest.fn();
+TodoList.prototype.enqueue = TodoList.prototype.emit;
 
 describe.only('TodoList', () => {
   it('should construct with new items array, and inherit from Entity', () => {
