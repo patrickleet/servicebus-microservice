@@ -1,3 +1,9 @@
+# REPO MOVED
+
+There are now two example repos over on the @servicebus org!
+  * [rabbitbus-model-service-template](https://github.com/servicebus/rabbitbus-model-service-template)
+  * [kafkabus-model-service-template](https://github.com/servicebus/kafkabus-model-service-template)
+
 # model-microservice-template
 
 This is an example of a "model" microservice, because that is the most complex :)
