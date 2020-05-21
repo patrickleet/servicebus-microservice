@@ -17,7 +17,7 @@
     "prepush": "make ci"
   },
   "dependencies": {
-    "@servicebus/register-handlers": "1.0.0",
+    "@servicebus/register-handlers": "1.0.2",
     "bluebird": "3.7.2",
     "cconfig": "2.0.2",
     "errortrap": "1.0.2",
